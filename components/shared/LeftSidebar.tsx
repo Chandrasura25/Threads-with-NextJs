@@ -39,7 +39,7 @@ function LeftSidebar() {
              </div>
             </SignOutButton>
           </SignedIn>
-          <p className="text-light-2 max-lg:hidden"></p>
+          <p className="text-light-2 max-lg:hidden">Log Out</p>
       </div>
     </section>
   );
