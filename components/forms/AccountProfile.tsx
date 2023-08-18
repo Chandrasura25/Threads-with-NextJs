@@ -1,4 +1,6 @@
-"use client"
+"use client";
+import {Form} from '@/components/ui/form';
+import {useForm} from 'react-hook-form'
 interface Props{
     user: {
         id: string;
@@ -11,8 +13,9 @@ interface Props{
     btnTitle: string;
 }
 const AccountProfile =({user, btnTitle}:Props)=>{
+    const form = useForm()
     return(
-        <div>Account Profile</div>
+        <Form></Form>
     )
 }
 export default AccountProfile;
