@@ -80,10 +80,12 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
       bio: values.bio,
       image: values.profile_photo,
       userId: user.id,
-      path:pathname,
+      path: pathname,
     });
-    if(pathname === '/profile/edit'){
+    if (pathname === "/profile/edit") {
       router.back();
+    } else {
+      router.push("/");
     }
   };
   return (
