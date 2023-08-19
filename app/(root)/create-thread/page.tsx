@@ -11,8 +11,6 @@ async function Page() {
   // fetch organization list created by user
   const userInfo = await fetchUser(user.id);
   if (!userInfo?.onboarded) redirect("/onboarding");
-  // const user_id = userInfo._id.toString();
-  // console.log(user_id);
   return (
     <>
       <h1 className="head-text">Create Thread</h1>
