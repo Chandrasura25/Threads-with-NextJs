@@ -2,7 +2,6 @@
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -38,9 +37,9 @@ function PostThread({ userId }: { userId: string }) {
       accountId: userId,
     },
   });
-const onSubmit = async (data: z.infer<typeof ThreadValidation>) => {
+  const onSubmit = async (data: z.infer<typeof ThreadValidation>) => {
     console.log(data);
-};
+  };
   return (
     <Form {...form}>
       <form
@@ -55,19 +54,15 @@ const onSubmit = async (data: z.infer<typeof ThreadValidation>) => {
               <FormLabel className="text-base-semibold text-light-2">
                 Content
               </FormLabel>
-              <FormControl 
-                  className="no-focus border border-dark-4 bg-dark-3 text-light-1">
-                <Textarea
-                 rows={15}
-                 {...field}
-                />
+              <FormControl className="no-focus border border-dark-4 bg-dark-3 text-light-1">
+                <Textarea rows={15} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
-          Post
+        <Button type="submit" className="bg-primary-500">
+          Post Thread
         </Button>
       </form>
     </Form>
