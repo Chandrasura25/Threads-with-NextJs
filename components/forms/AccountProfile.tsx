@@ -17,7 +17,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserValidation } from "@/lib/validations/user";
 import * as z from "zod";
 import { ChangeEvent, useState } from "react";
-
+import { isBase64Image } from "@/lib/utils";
+import {useUploadThing} from '@/lib/uploadthing'
 interface Props {
   user: {
     id: string;
@@ -61,6 +62,9 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     console.log(values);
     const blob = values.profile_photo;
     const hasImageChanged = isBase64Image(blob);
+    if(hasImageChanged){
+      const imgRes=
+    }
   }
   return (
     <Form {...form}>
