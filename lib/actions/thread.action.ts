@@ -1,3 +1,4 @@
+"use server"
 import Thread from "../models/thread.model";
 import User from "../models/user.model";
 import { connectToDB } from "../mongoose";
