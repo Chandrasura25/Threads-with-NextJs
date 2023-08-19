@@ -15,6 +15,7 @@ import * as z from "zod";
 // import { updateUser } from "@/lib/actions/user.actions";
 import { ThreadValidation } from "@/lib/validations/thread";
 import { useRouter, usePathname } from "next/navigation";
+import { createThread } from "@/lib/actions/thread.action";
 interface Props {
   user: {
     id: string;
@@ -37,8 +38,14 @@ function PostThread({ userId }: { userId: string }) {
       accountId: userId,
     },
   });
-  const onSubmit = async (data: z.infer<typeof ThreadValidation>) => {
-    console.log(data);
+  const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
+    await createThread({
+        text: values.thread,
+        author: userId,
+        communityId:null,
+        path:pathname
+    });
+    router.push('/');
   };
   return (
     <Form {...form}>
