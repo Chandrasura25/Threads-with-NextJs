@@ -1,5 +1,6 @@
-export default function Home() {
-  return (
-  <h1 className="head-text">Home</h1>
-  )
+import { fetchPosts } from "@/lib/actions/thread.action";
+
+export default async function Home() {
+  const result = await fetchPosts();
+  return <h1 className="head-text text-left">Home</h1>;
 }
