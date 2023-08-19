@@ -18,7 +18,7 @@ import { UserValidation } from "@/lib/validations/user";
 import * as z from "zod";
 import { ChangeEvent, useState } from "react";
 import { isBase64Image } from "@/lib/utils";
-import {useUploadThing} from '@/lib/uploadthing'
+import { useUploadThing } from "@/lib/uploadthing";
 interface Props {
   user: {
     id: string;
@@ -32,6 +32,7 @@ interface Props {
 }
 const AccountProfile = ({ user, btnTitle }: Props) => {
   const [files, setFiles] = useState<File[]>([]);
+  const { startUpload } = useUploadThing("media");
   const form = useForm({
     resolver: zodResolver(UserValidation),
     defaultValues: {
@@ -58,12 +59,15 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
       fileReader.readAsDataURL(file);
     }
   };
-  function onSubmit(values: z.infer<typeof UserValidation>) {
+  const onSubmit=async(values: z.infer<typeof UserValidation>)=>{
     console.log(values);
     const blob = values.profile_photo;
     const hasImageChanged = isBase64Image(blob);
-    if(hasImageChanged){
-      const imgRes=
+    if (hasImageChanged) {
+      const imgRes = await startUpload(files);
+      if(imgRes && imgRes[0].fileUrl){
+        values.profile_photo = imgRes[0].fileUrl;
+      }
     }
   }
   return (
