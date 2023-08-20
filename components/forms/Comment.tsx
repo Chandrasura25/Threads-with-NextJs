@@ -2,7 +2,6 @@
 
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { useOrganization } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -28,17 +27,15 @@ const Comment = ({ threadId, currentUserImg, currentUserId }: Props) => {
      const router = useRouter();
   const pathname = usePathname();
 
-  const { organization } = useOrganization();
-
-  const form = useForm<z.infer<typeof ThreadValidation>>({
-    resolver: zodResolver(ThreadValidation),
+  const form = useForm<z.infer<typeof CommentValidation>>({
+    resolver: zodResolver(CommentValidation),
     defaultValues: {
       thread: "",
       accountId: userId,
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
+  const onSubmit = async (values: z.infer<typeof CommentValidation>) => {
    await createThread({
       text: values.thread,
       author: userId,
