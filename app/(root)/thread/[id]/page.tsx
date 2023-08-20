@@ -13,7 +13,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
   if(!userInfo?.onboarded) redirect('/onboarding')
   const thread = await fetchThreadById(params.id )
   return (
-    <section>
+    <section className="relative">
       <div>
         <ThreadCard
           key={thread._id}
