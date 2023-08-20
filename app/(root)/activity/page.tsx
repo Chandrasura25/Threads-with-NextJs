@@ -1,11 +1,8 @@
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import { fetchUser, fetchUsers } from "@/lib/actions/user.actions";
-import ProfileHeader from "@/components/shared/ProfileHeader";
-import { profileTabs } from "@/constants";
+import { fetchUser, getActivity } from "@/lib/actions/user.actions";
+import Link from "next/link";
 import Image from "next/image";
-import ThreadsTab from "@/components/shared/ThreadsTab";
-import UserCard from "@/components/cards/UserCard";
 
 async function Page() {
   const user = await currentUser();
@@ -13,9 +10,24 @@ async function Page() {
 
   const userInfo = await fetchUser(user.id);
   if (!userInfo?.onboarded) redirect("/onboarding");
+  const activity = await getActivity(userInfo._id);
   return (
     <section>
       <h1 className="head-text mb-10">Activity</h1>
+      <section className="mt-10 flex flex-col gap-5">
+        {activity.length> 0 ? (
+          <>
+          {activity.map((activity)=>(
+            <Link href={`/thread/${activity.parentId}`} key={activity._id}>
+              <article className="activity-card">
+                <Image src={activity.author.image} alt="Profile Picture" width={20} height={20} className="rounded-full object-contain" />
+              </article>
+            </Link>
+          ))}
+          </>
+          ):<p>No Activity Yet</p>
+          }
+      </section>
     </section>
   );
 };
