@@ -1,6 +1,7 @@
+"use client"
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 interface Props {
   id: string;
