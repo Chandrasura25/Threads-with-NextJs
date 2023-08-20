@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Link from "next/link";
+
 interface Props {
   id: string;
   currentUserId: string;
@@ -40,6 +43,11 @@ const ThreadCard = ({
                             <Image src={author.image} alt="Profile Image" fill className="cursor-pointer rounded-full" />
                         </Link>
                         <div className='thread-card_bar' />
+                    </div>
+                    <div>
+                    <Link href={`/profile/${author.id}`} className="w-fit">
+                        <h4></h4>
+                    </Link>
                     </div>
                 </div>
             </div>
