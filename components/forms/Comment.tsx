@@ -17,31 +17,30 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import { CommentValidation } from "@/lib/validations/thread";
-import { createThread } from "@/lib/actions/thread.action";
+// import { createThread } from "@/lib/actions/thread.action";
 interface Props {
   threadId: string;
   currentUserImg: string;
   currentUserId: string;
 }
 const Comment = ({ threadId, currentUserImg, currentUserId }: Props) => {
-     const router = useRouter();
+  const router = useRouter();
   const pathname = usePathname();
 
   const form = useForm<z.infer<typeof CommentValidation>>({
     resolver: zodResolver(CommentValidation),
     defaultValues: {
       thread: "",
-      accountId: userId,
     },
   });
 
   const onSubmit = async (values: z.infer<typeof CommentValidation>) => {
-   await createThread({
-      text: values.thread,
-      author: userId,
-      communityId:  null,
-      path: pathname,
-    });
+    //    await createThread({
+    //       text: values.thread,
+    //       author: userId,
+    //       communityId:  null,
+    //       path: pathname,
+    //     });
 
     router.push("/");
   };
@@ -60,7 +59,12 @@ const Comment = ({ threadId, currentUserImg, currentUserId }: Props) => {
                 Content
               </FormLabel>
               <FormControl className="no-focus border border-dark-4 bg-dark-3 text-light-1">
-                <Input {...field} />
+                <Input
+                  type="text"
+                  placeholder="Comment..."
+                  className="no-focus text-light-1 outline-none"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
