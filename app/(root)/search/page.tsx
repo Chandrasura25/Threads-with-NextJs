@@ -5,6 +5,7 @@ import ProfileHeader from "@/components/shared/ProfileHeader";
 import { profileTabs } from "@/constants";
 import Image from "next/image";
 import ThreadsTab from "@/components/shared/ThreadsTab";
+import UserCard from "@/components/cards/UserCard";
 
 async function Page() {
   const user = await currentUser();
@@ -27,7 +28,14 @@ async function Page() {
         ) : (
           <>
             {result.users.map((person) => (
-              <UserCard />
+              <UserCard
+                key={person.id}
+                id={person.id}
+                name={person.name}
+                username={person.username}
+                imgUrl={person.image}
+                personType="User"
+              />
             ))}
           </>
         )}
