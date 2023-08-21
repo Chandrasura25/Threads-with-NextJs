@@ -25,7 +25,7 @@ async function Page() {
             </Link>
           ))}
           </>
-          ):<p>No Activity Yet</p>
+          ):<p className="!text-base-regular text-light-3">No Activity Yet</p>
           }
       </section>
     </section>
