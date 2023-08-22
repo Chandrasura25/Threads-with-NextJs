@@ -5,6 +5,7 @@ import ProfileHeader from "@/components/shared/ProfileHeader";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import ThreadsTab from "@/components/shared/ThreadsTab";
 import { fetchCommunityDetails } from "@/lib/actions/community.actions";
+import UserCard from "@/components/cards/UserCard";
 
 async function Page({ params }: { params: { id: string } }) {
   const user = await currentUser();
@@ -43,6 +44,28 @@ async function Page({ params }: { params: { id: string } }) {
             ))}
           </TabsList>
           <TabsContent className="w-full text-light-1" value="threads">
+            <ThreadsTab
+              currentUserId={user.id}
+              accountId={communityDetails._id}
+              accountType="Community"
+            />
+          </TabsContent>
+          <TabsContent className="w-full text-light-1" value="members">
+            <section className="flex flex-col mt-9 gap-10">
+                {communityDetails?.members?.map((member:any) => (
+                    <UserCard
+                        key={member.id}
+                        id={member.id}
+                        name={member.name}
+                        username={member.username}
+                        imgUrl={member.image}
+                        personType="User"
+                    />
+                ))
+                    }
+            </section>
+          </TabsContent>
+          <TabsContent className="w-full text-light-1" value="requests">
             <ThreadsTab
               currentUserId={user.id}
               accountId={communityDetails._id}
