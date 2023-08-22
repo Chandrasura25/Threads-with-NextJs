@@ -36,21 +36,19 @@ async function Page({ params }: { params: { id: string } }) {
                 <p className="max-sm:hidden">{tab.label}</p>
                 {tab.label === "Threads" && (
                   <p className="ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-light-2">
-                    {userInfo?.threads?.length}
+                    {communityDetails?.threads?.length}
                   </p>
                 )}
               </TabsTrigger>
             ))}
           </TabsList>
-          {profileTabs.map((tab) => (
-            <TabsContent key={`content-${tab.label}`} value={tab.value}>
-              <ThreadsTab
-                currentUserId={user.id}
-                accountId={userInfo.id}
-                accountType="User"
-              />
-            </TabsContent>
-          ))}
+          <TabsContent className="w-full text-light-1" value="threads">
+            <ThreadsTab
+              currentUserId={user.id}
+              accountId={communityDetails._id}
+              accountType="Community"
+            />
+          </TabsContent>
         </Tabs>
       </div>
     </section>
