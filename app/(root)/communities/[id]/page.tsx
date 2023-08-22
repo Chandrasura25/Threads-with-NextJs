@@ -19,11 +19,12 @@ async function Page({ params }: { params: { id: string } }) {
         username={communityDetails.username}
         imgUrl={communityDetails.image}
         bio={communityDetails.bio}
+        type="Community"
       />
       <div className="mt-9">
         <Tabs defaultValue="threads" className="w-full">
           <TabsList className="tab">
-            {profileTabs.map((tab) => (
+            {communityTabs.map((tab) => (
               <TabsTrigger key={tab.label} value={tab.value} className="tab">
                 <Image
                   src={tab.icon}
@@ -41,12 +42,12 @@ async function Page({ params }: { params: { id: string } }) {
               </TabsTrigger>
             ))}
           </TabsList>
-          {profileTabs.map((tab)=>(
+          {profileTabs.map((tab) => (
             <TabsContent key={`content-${tab.label}`} value={tab.value}>
               <ThreadsTab
-              currentUserId={user.id}
-              accountId={userInfo.id}
-              accountType="User"
+                currentUserId={user.id}
+                accountId={userInfo.id}
+                accountType="User"
               />
             </TabsContent>
           ))}
